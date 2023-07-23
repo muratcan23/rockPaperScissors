@@ -1,7 +1,19 @@
+import { Flex, Text } from "@chakra-ui/react";
+
 function App() {
   return (
     <div className="App">
-      <h1>Rock Paper Scissors</h1>
+      <Flex
+        alignItems="center"
+        justifyContent="center"
+        h="90px"
+        w="100"
+        bg="#381452"
+      >
+        <Text fontFamily="cursive" color="white" letterSpacing="2px">
+          Rock Paper Scissors
+        </Text>
+      </Flex>
     </div>
   );
 }
