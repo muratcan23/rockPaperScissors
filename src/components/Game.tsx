@@ -1,6 +1,13 @@
 import { Flex, Image, VStack } from "@chakra-ui/react";
+import { FC, useState } from "react";
 
-const Game = () => {
+const choices = ["rock", "paper", "scissors"];
+
+const Game: FC = () => {
+  const [playerChoice, setPlayerChoice] = useState("");
+  const [computerChoice, setComputerChoice] = useState("");
+  const [result, setResult] = useState("");
+
   return (
     <Flex>
       <VStack>
