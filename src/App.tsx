@@ -1,20 +1,13 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
+import Game from "./components/Game";
+import Header from "./components/Header";
 
 function App() {
   return (
-    <div className="App">
-      <Flex
-        alignItems="center"
-        justifyContent="center"
-        h="90px"
-        w="100"
-        bg="#381452"
-      >
-        <Text fontFamily="cursive" color="white" letterSpacing="2px">
-          Rock Paper Scissors
-        </Text>
-      </Flex>
-    </div>
+    <ChakraProvider>
+      <Header />
+      <Game />
+    </ChakraProvider>
   );
 }
 
