@@ -1,5 +1,5 @@
 import { Flex, Image, VStack } from "@chakra-ui/react";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 const choices = ["rock", "paper", "scissors"];
 
@@ -7,13 +7,27 @@ const Game: FC = () => {
   const [playerChoice, setPlayerChoice] = useState("");
   const [computerChoice, setComputerChoice] = useState("");
   const [result, setResult] = useState("");
+  const [isGameInProgress, setGameInProgress] = useState(false);
+
+  useEffect(() => {
+    if (isGameInProgress) {
+      const delay = setTimeout(() => {
+        const computerRandomChoice =
+          choices[Math.floor(Math.random() * choices.length)];
+        setComputerChoice(computerRandomChoice);
+        determineResult(playerChoice, computerRandomChoice);
+        setGameInProgress(false);
+      }, 1500);
+
+      return () => clearTimeout(delay);
+    }
+  }, [isGameInProgress, playerChoice]);
 
   const handleBoxClick = (choice: string) => {
-    setPlayerChoice(choice);
-    const computerRandomChoice =
-      choices[Math.floor(Math.random() * choices.length)];
-    setComputerChoice(computerRandomChoice);
-    determineResult(choice, computerRandomChoice);
+    if (!isGameInProgress) {
+      setPlayerChoice(choice);
+      setGameInProgress(true);
+    }
   };
 
   const determineResult = (playerChoice: string, computerChoice: string) => {
@@ -69,7 +83,20 @@ const Game: FC = () => {
       </VStack>
       <div>
         {playerChoice && <p>Your choice: {playerChoice}</p>}
-        {computerChoice && <p>Computer's choice: {computerChoice}</p>}
+        {isGameInProgress && <p>Computer is choosing...</p>}
+        {computerChoice && (
+          <Flex>
+            <Image
+              src={
+                computerChoice === "rock"
+                  ? "https://example.com/rock.svg"
+                  : computerChoice === "paper"
+                  ? "https://example.com/paper.svg"
+                  : "https://example.com/scissors.svg"
+              }
+            />
+          </Flex>
+        )}
         {result && <p>Result: {result}</p>}
       </div>
     </Flex>
