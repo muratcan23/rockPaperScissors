@@ -2,6 +2,20 @@ import { Box, Center, Flex, Image, Text, VStack } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 
 const choices = ["rock", "paper", "scissors"];
+const DataChoise = [
+  {
+    choice: "rock",
+    url: "https://svgsilh.com/svg/576655.svg",
+  },
+  {
+    choice: "paper",
+    url: "https://www.svgrepo.com/download/221785/paper.svg",
+  },
+  {
+    choice: "scissors",
+    url: "https://freesvg.org/img/scissors_01.png",
+  },
+];
 
 const Game: FC = () => {
   const [playerChoice, setPlayerChoice] = useState("");
@@ -32,15 +46,15 @@ const Game: FC = () => {
 
   const determineResult = (playerChoice: string, computerChoice: string) => {
     if (playerChoice === computerChoice) {
-      setResult("It's a tie!");
+      setResult("It's a tie !");
     } else if (
       (playerChoice === "rock" && computerChoice === "scissors") ||
       (playerChoice === "paper" && computerChoice === "rock") ||
       (playerChoice === "scissors" && computerChoice === "paper")
     ) {
-      setResult("You win!");
+      setResult("You win !");
     } else {
-      setResult("Computer wins!");
+      setResult("Computer wins !");
     }
   };
 
@@ -59,88 +73,98 @@ const Game: FC = () => {
 
   return (
     <Flex>
-      <VStack spacing={4}>
-        <Box
-          h="200px"
-          w="175px"
-          border="1px solid red"
-          as="button"
-          alignItems="center"
-          justifyContent="center"
-          onClick={() => handleBoxClick("rock")}
-        >
-          <Image src="https://svgsilh.com/svg/576655.svg" />
-        </Box>
-        <Box
-          h="200px"
-          w="175px"
-          border="1px solid red"
-          as="button"
-          alignItems="center"
-          justifyContent="center"
-          onClick={() => handleBoxClick("paper")}
-        >
-          <Image src="https://www.svgrepo.com/download/221785/paper.svg" />
-        </Box>
-        <Box
-          h="200px"
-          w="175px"
-          border="1px solid red"
-          as="button"
-          alignItems="center"
-          justifyContent="center"
-          onClick={() => handleBoxClick("scissors")}
-        >
-          <Image src="https://freesvg.org/img/scissors_01.png" />
-        </Box>
+      <VStack spacing={4} bg="gray.300" ml="40px" h="80%">
+        {DataChoise.map((item) => (
+          <Box
+            key={item.url}
+            h="200px"
+            w="175px"
+            as="button"
+            alignItems="center"
+            justifyContent="center"
+            onClick={() => handleBoxClick(item.choice)}
+            _hover={{ bg: "#d0a85c" }}
+          >
+            <Image src={item.url} />
+          </Box>
+        ))}
       </VStack>
       {/* Your choice */}
       <Center ml="20%">
-        <Flex ml="25%" border="1px solid black" h="333px">
-          <Flex flexDirection="column" border="2px solid blue" h="250px">
-            <Box h="40px">
-              {playerChoice && <Text>Your choice: {playerChoice}</Text>}
-            </Box>
-            <Box
-              h="200px"
-              w="200px"
-              border="1px solid red"
-              as="button"
-              alignItems="center"
-              justifyContent="center"
-              onClick={() => handleBoxClick("scissors")}
-            >
-              <Image src={getImageUrl(playerChoice)} />
-            </Box>
-          </Flex>
-
-          {/* computers choice */}
-          <Flex flexDirection="column" border="1px solid green" h="250px">
-            <Box h="40px">
-              <Text>Computer chose: {computerChoice}</Text>
-            </Box>
-            {computerChoice && (
+        <Flex
+          ml="25%"
+          border="1px solid black"
+          h="333px"
+          flexDirection="column"
+          borderRadius="5px"
+        >
+          <Flex>
+            <Flex flexDirection="column" h="250px">
+              <Box h="40px" bg="#D8DFE0">
+                {playerChoice && (
+                  <Text fontFamily="inherit" fontWeight="bold" fontSize="18px">
+                    Your choice ={" "}
+                    <span style={{ color: "tomato" }}>{playerChoice}</span>
+                  </Text>
+                )}
+              </Box>
               <Box
+                p="10px"
                 h="200px"
                 w="200px"
-                border="1px solid red"
                 as="button"
                 alignItems="center"
                 justifyContent="center"
+                bg="#AD36A1"
               >
-                <Image src={getImageUrl(computerChoice)} />
+                <Image src={getImageUrl(playerChoice)} />
               </Box>
-            )}
+            </Flex>
+
+            {/* computers choice */}
+            <Flex flexDirection="column" h="250px">
+              <Box h="40px" bg="#D8DFE0">
+                <Text fontFamily="inherit" fontWeight="bold" fontSize="18px">
+                  Your choice ={" "}
+                  <span style={{ color: "#2A0AD9" }}>{computerChoice}</span>
+                </Text>
+              </Box>
+              {computerChoice && (
+                <Box
+                  p="10px"
+                  h="200px"
+                  w="200px"
+                  border="1px solid red"
+                  as="button"
+                  alignItems="center"
+                  justifyContent="center"
+                  bg="#0bc6e3"
+                >
+                  <Image src={getImageUrl(computerChoice)} />
+                </Box>
+              )}
+            </Flex>
           </Flex>
 
           <Box
             borderRadius="10px"
-            h="45px"
-            w="200px"
+            h="55px"
+            w="100%"
             border="2px solid red"
-            mt="20px"
+            alignItems="center"
+            bg="#D6EA13"
           >
-            {result && <Text>Result: {result}</Text>}
+            {result && (
+              <Text
+                fontFamily="cursive"
+                fontWeight="extrabold"
+                fontSize="29px"
+                ml="30%"
+              >
+                {" "}
+                {result}
+              </Text>
+            )}
           </Box>
         </Flex>
       </Center>
