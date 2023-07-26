@@ -1,4 +1,4 @@
-import { Flex, Image, VStack } from "@chakra-ui/react";
+import { Box, Center, Flex, Image, Text, VStack } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
 
 const choices = ["rock", "paper", "scissors"];
@@ -17,7 +17,7 @@ const Game: FC = () => {
         setComputerChoice(computerRandomChoice);
         determineResult(playerChoice, computerRandomChoice);
         setGameInProgress(false);
-      }, 1500);
+      }, 250);
 
       return () => clearTimeout(delay);
     }
@@ -44,10 +44,23 @@ const Game: FC = () => {
     }
   };
 
+  const getImageUrl = (choice: string) => {
+    // Replace these URLs with the correct image URLs for each choice
+    if (choice === "rock") {
+      return "https://svgsilh.com/svg/576655.svg";
+    } else if (choice === "paper") {
+      return "https://www.svgrepo.com/download/221785/paper.svg";
+    } else if (choice === "scissors") {
+      return "https://freesvg.org/img/scissors_01.png";
+    } else {
+      return "";
+    }
+  };
+
   return (
     <Flex>
-      <VStack>
-        <Flex
+      <VStack spacing={4}>
+        <Box
           h="200px"
           w="175px"
           border="1px solid red"
@@ -57,8 +70,8 @@ const Game: FC = () => {
           onClick={() => handleBoxClick("rock")}
         >
           <Image src="https://svgsilh.com/svg/576655.svg" />
-        </Flex>
-        <Flex
+        </Box>
+        <Box
           h="200px"
           w="175px"
           border="1px solid red"
@@ -68,8 +81,8 @@ const Game: FC = () => {
           onClick={() => handleBoxClick("paper")}
         >
           <Image src="https://www.svgrepo.com/download/221785/paper.svg" />
-        </Flex>
-        <Flex
+        </Box>
+        <Box
           h="200px"
           w="175px"
           border="1px solid red"
@@ -79,26 +92,58 @@ const Game: FC = () => {
           onClick={() => handleBoxClick("scissors")}
         >
           <Image src="https://freesvg.org/img/scissors_01.png" />
-        </Flex>
+        </Box>
       </VStack>
-      <div>
-        {playerChoice && <p>Your choice: {playerChoice}</p>}
-        {isGameInProgress && <p>Computer is choosing...</p>}
-        {computerChoice && (
-          <Flex>
-            <Image
-              src={
-                computerChoice === "rock"
-                  ? "https://example.com/rock.svg"
-                  : computerChoice === "paper"
-                  ? "https://example.com/paper.svg"
-                  : "https://example.com/scissors.svg"
-              }
-            />
+      {/* Your choice */}
+      <Center ml="20%">
+        <Flex ml="25%" border="1px solid black" h="333px">
+          <Flex flexDirection="column" border="2px solid blue" h="250px">
+            <Box h="40px">
+              {playerChoice && <Text>Your choice: {playerChoice}</Text>}
+            </Box>
+            <Box
+              h="200px"
+              w="200px"
+              border="1px solid red"
+              as="button"
+              alignItems="center"
+              justifyContent="center"
+              onClick={() => handleBoxClick("scissors")}
+            >
+              <Image src={getImageUrl(playerChoice)} />
+            </Box>
           </Flex>
-        )}
-        {result && <p>Result: {result}</p>}
-      </div>
+
+          {/* computers choice */}
+          <Flex flexDirection="column" border="1px solid green" h="250px">
+            <Box h="40px">
+              <Text>Computer chose: {computerChoice}</Text>
+            </Box>
+            {computerChoice && (
+              <Box
+                h="200px"
+                w="200px"
+                border="1px solid red"
+                as="button"
+                alignItems="center"
+                justifyContent="center"
+              >
+                <Image src={getImageUrl(computerChoice)} />
+              </Box>
+            )}
+          </Flex>
+
+          <Box
+            borderRadius="10px"
+            h="45px"
+            w="200px"
+            border="2px solid red"
+            mt="20px"
+          >
+            {result && <Text>Result: {result}</Text>}
+          </Box>
+        </Flex>
+      </Center>
     </Flex>
   );
 };
