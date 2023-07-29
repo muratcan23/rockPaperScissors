@@ -73,7 +73,7 @@ const Game: FC = () => {
 
   return (
     <Flex bg="#157A38">
-      <VStack spacing={4} bg="gray.300" ml="40px" h="80%">
+      <VStack spacing={4} bg="gray.300" ml="40px" h="100%">
         {DataChoise.map((item) => (
           <Box
             key={item.url}
@@ -91,7 +91,7 @@ const Game: FC = () => {
       </VStack>
       {/* Your choice */}
       <Center ml="20%">
-        <Flex h="333px" flexDirection="column" borderRadius="5px">
+        <Flex h="60%" flexDirection="column" borderRadius="5px">
           <Flex bg="#1D1B1E" p={2}>
             <Flex flexDirection="column" h="250px" w="250px">
               <Box h="40px" bg="#D8DFE0">
