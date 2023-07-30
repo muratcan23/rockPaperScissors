@@ -59,7 +59,6 @@ const Game: FC = () => {
   };
 
   const getImageUrl = (choice: string) => {
-    // Replace these URLs with the correct image URLs for each choice
     if (choice === "rock") {
       return "https://svgsilh.com/svg/576655.svg";
     } else if (choice === "paper") {
@@ -139,7 +138,7 @@ const Game: FC = () => {
                   </Text>
                 </Box>
               )}
-              {/* You can use the same height, width, alignItems, and justifyContent for computer's choice */}
+
               <Box
                 h="90%"
                 w="100%"
