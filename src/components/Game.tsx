@@ -31,7 +31,7 @@ const Game: FC = () => {
         setComputerChoice(computerRandomChoice);
         determineResult(playerChoice, computerRandomChoice);
         setShowComputerChoice(false);
-      }, 250);
+      }, 200);
 
       return () => clearTimeout(delay);
     }
