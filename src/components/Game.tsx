@@ -90,10 +90,16 @@ const Game: FC = () => {
         ))}
       </VStack>
       {/* Your choice */}
-      <Center ml="20%">
-        <Flex h="60%" flexDirection="column" borderRadius="5px">
-          <Flex bg="#1D1B1E" p={2}>
-            <Flex flexDirection="column" h="250px" w="250px">
+      <Center mx="20%">
+        <Flex h="70vh" w="50vw" flexDirection="column">
+          <Flex bg="#1D1B1E" p={4} h="80%" borderRadius="10px">
+            <Flex
+              flexDirection="column"
+              h="350px"
+              w="350px"
+              border="2px solid white"
+              borderRadius="5px"
+            >
               <Box h="40px" bg="#D8DFE0">
                 <Text fontFamily="inherit" fontWeight="bold" fontSize="18px">
                   Player's choice:{" "}
@@ -101,7 +107,7 @@ const Game: FC = () => {
                 </Text>
               </Box>
               <Box
-                h="200px"
+                h="90%"
                 w="100%"
                 alignItems="center"
                 justifyContent="center"
@@ -117,36 +123,37 @@ const Game: FC = () => {
             </Flex>
 
             {/* computers choice */}
-            <Flex flexDirection="column" h="250px" ml="25px">
-              {computerChoice !== null && ( // Conditionally render computer's choice section
-                <Flex flexDirection="column" h="250px" w="250px">
-                  <Box h="40px" bg="#D8DFE0">
-                    <Text
-                      fontFamily="inherit"
-                      fontWeight="bold"
-                      fontSize="18px"
-                    >
-                      Computer's choice:{" "}
-                      <span style={{ color: "#2A0AD9" }}>{computerChoice}</span>
-                    </Text>
-                  </Box>
-                  <Box
-                    h="200px"
-                    w="100%"
-                    border="1px solid red"
-                    bg="#0bc6e3"
-                    ml="auto"
-                    p="5px"
-                  >
-                    <Image
-                      src={getImageUrl(computerChoice)}
-                      w="90%"
-                      h="90%"
-                      p="5px"
-                    />
-                  </Box>
-                </Flex>
+            <Flex
+              ml="5%"
+              flexDirection="column"
+              h="350px"
+              w="350px"
+              border="2px solid white"
+              borderRadius="5px"
+            >
+              {computerChoice !== null && (
+                <Box h="40px" bg="#D8DFE0">
+                  <Text fontFamily="inherit" fontWeight="bold" fontSize="18px">
+                    Computer's choice:{" "}
+                    <span style={{ color: "#2A0AD9" }}>{computerChoice}</span>
+                  </Text>
+                </Box>
               )}
+              {/* You can use the same height, width, alignItems, and justifyContent for computer's choice */}
+              <Box
+                h="90%"
+                w="100%"
+                alignItems="center"
+                justifyContent="center"
+                bg="#AD36A1"
+              >
+                <Image
+                  src={getImageUrl(computerChoice)}
+                  w="90%"
+                  h="90%"
+                  p="5px"
+                />
+              </Box>
             </Flex>
           </Flex>
 
